@@ -13,6 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'jose'
 api = Api(app)
+db.init_app(app)
 
 @app.before_first_request #Replaces create_tables.py
 def create_tables():
@@ -29,5 +30,4 @@ api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
 
 if __name__ == '__main__':
-    db.init_app(app)
     app.run(port=5000, debug=True)
